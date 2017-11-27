@@ -1,0 +1,14 @@
+ui block text("Result",#result)
+ui button("Run") {
+    add list to list(%results,$find regular expression($scrape attribute(<class="r">,"innerhtml"),"(?<=href\\=\\\")http.*?(?=\\\")"),"Delete","Global")
+    set(#result,"","Global")
+    set(#result,%results,"Global")
+}
+ui button("Copy Result") {
+    plugin command("Advanced Data Text File.dll", "set clipboard", #result, "Text")
+}
+ui button("Clear All") {
+    clear all data
+    clear cookies
+    navigate("google.co.id","Wait")
+}
